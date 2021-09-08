@@ -1,0 +1,25 @@
+# This is a docker manifest for development, NOT production.
+
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_ID: ${USER_ID:-0}
+        GROUP_ID: ${GROUP_ID:-0}
+    volumes:
+      - ${PWD}:/home/user/app:z
+    ports:
+      - 4000:4000
+      - 35730:35730
+    stdin_open: true
+    tty: true
+    command: iex -S mix phx.server
+    env_file:
+      - .env
+
+volumes:
+  pgdata:
