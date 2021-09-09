@@ -1,4 +1,4 @@
-defmodule FaeClient.Schemas.Business do
+defmodule FaeClientv2.Schemas.Business do
   use Ecto.Schema
   import Ecto.Changeset
 

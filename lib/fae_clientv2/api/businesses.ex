@@ -1,7 +1,7 @@
-defmodule FaeClient.API.Businesses do
+defmodule FaeClientv2.API.Businesses do
   alias Ecto.Changeset
 
-  alias FaeClient.Schemas.Business, as: Business
+  alias FaeClientv2.Schemas.Business, as: Business
 
   @success_codes 200..399
 
