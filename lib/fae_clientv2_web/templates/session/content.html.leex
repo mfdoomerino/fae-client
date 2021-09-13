@@ -1,0 +1,26 @@
+<div>
+  <h1>Register</h1>
+  <%= f = form_for @changeset, "#", id: "sign-up-form", phx_change: "form_params", phx_submit: "sign_up" %>
+    <%= email_input f, :email, required: true, placeholder: "Email", autocomplete: "off" %>
+    <%= error_tag f, :email %>
+    <%= password_input f, :password, required: true, placeholder: "Password", autocomplete: "off" %>
+    <%= error_tag f, :password %>
+    <%= submit "Sign-up", disabled: !@valid %>
+  </form>
+</div>
+<div>
+  <h1>Sign-in</h1>
+  <%= f = form_for @changeset, Routes.session_path(@socket, :sign_in), id: "sign-in-form" %>
+    <%= email_input f, :email, required: true, placeholder: "Email", autocomplete: "off" %>
+    <%= error_tag f, :email %>
+    <%= password_input f, :password, required: true, placeholder: "Password", autocomplete: "off" %>
+    <%= error_tag f, :password %>
+    <%= submit "Sign-in" %>
+  </form>
+</div>
+<p class="alert alert-info" role="alert"
+    phx-click="lv:clear-flash"
+    phx-value-key="info"><%= live_flash(@flash, :info) %></p>
+<p class="alert alert-danger" role="alert"
+  phx-click="lv:clear-flash"
+  phx-value-key="error"><%= live_flash(@flash, :error) %></p>

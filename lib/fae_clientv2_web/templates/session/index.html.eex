@@ -1,0 +1,4 @@
+<%= live_render @conn, FaeClientv2Web.Live.Session.Index,
+  id: "session_index",
+  container: {:div, class: "secondments-index"}
+%>

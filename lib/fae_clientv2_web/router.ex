@@ -14,18 +14,20 @@ defmodule FaeClientv2Web.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :authenticated do
+    plug FaeClientv2Web.Plugs.AuthenticatedPipeline
+  end
+
   scope "/", FaeClientv2Web do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    post "/sign_in", SessionController, :sign_in
+    resources "/accounts", SessionController, only: [:index]
   end
 
-  if Mix.env() in [:dev, :test] do
-    import Phoenix.LiveDashboard.Router
+  scope "/dashboard", FaeClientv2Web do
+    pipe_through [:browser, :authenticated]
 
-    scope "/" do
-      pipe_through :browser
-      live_dashboard "/dashboard", metrics: FaeClientv2Web.Telemetry
-    end
+    resources "/", DashboardController, only: [:index]
   end
 end
